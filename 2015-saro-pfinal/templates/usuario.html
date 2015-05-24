@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>MadridEvent</title>
+
+	<style type="text/css" >
+		
+		body {
+			margin: 10px 20% 50px 70px;
+			font-family: sans-serif;
+			color: black;
+			background: white;
+		}
+		#menu{
+		 background:#f9f9f9;
+		 border:solid 1px #DEDEDE;
+		 border-radius:3px;
+		 width:350px;
+		 padding:5px;
+		 }
+		menu{
+		 color:#06F;
+		 display:inline-block;
+		 margin:0px;
+		 background:linear-gradient(#fff 0%,#dedede 100%);
+		 background:-moz-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-ms-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-o-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-webkit-linear-gradient(#fff 0%,#dedede 100%);
+		 border:solid 1px #f9f9f9;
+		 border-radius:5px;
+		 width:100px;
+		 padding:5px;
+		 }
+		menu:hover{
+		 background:linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-moz-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-ms-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-o-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-webkit-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 border-radius:3px;
+		 border:solid 1px #333;
+		 color:red;
+		 } 
+	 </style>
+
+	{% if VALUE == 0%}
+	<link rel="stylesheet" href="/css">
+		{% endif %}
+
+	{% if VALUE == 2%}
+	<link rel="stylesheet" href="/css">
+		{% endif %}
+
+
+</head>
+<body>
+	{% if VALUE = 1%}
+	<form action='/login'  method = 'POST' role="form" id="login">
+			<input  type="text"     class="form-control" placeholder="User"     name='username'>
+			<input  type="password" class="form-control" placeholder="Password" name='password'>
+			<button type="submit"   class="btn btn-default">Login</button>
+		</form>
+	{% endif %}
+
+	{% if VALUE == 0%}
+	<form action='/logout' method = 'GET'>
+				<input  type="text"     class="form-control"  value="{{USUARIO}}"    name='user'>
+				<button type='submit'     >LO GOUT</button>
+	</form>
+	{% endif %}
+
+	{% if VALUE == 2%}
+	<form action='/logout' method = 'GET'>
+				<input  type="text"     class="form-control"  value="{{USUARIO}}"    name='user'>
+				<button type='submit'     >LO GOUT</button>
+	</form>
+	{% endif %}
+
+			
+	<div id="menu">
+		<menu><a href='/'>INICIO</a></menu>
+		<menu><a href='/eventos'>TODAS</a></menu>
+		<menu><a href='/ayuda'>AYUDA</a></menu>
+		<img src="/image" alt="Madrid" height="42" width="42"> 
+
+	</div>
+
+
+	<header>
+		<h1>MadridEvent</h1>
+		<h3><p id="login">PÁGINA PERSONAL DE {{NOMBRE}}</p></h3>
+		<h2><p align = 'center' >TITULO: {{TITULO}}</p></h2>
+		<h3><p align = 'center' >DESCRIPCION: {{DESCRIPCION}}</p></h3>
+			
+		{% if VALUE = 0%}
+			
+			<form action='/{{USUARIO}}'  method = 'POST'  id="formulario">
+				<input  type="text"  placeholder="titulo " name='titulo'>
+				<button type="submit"     >GUARDAR</button>
+			</form>
+			
+			<form action='/{{USUARIO}}'  method = 'POST' id="formulario">
+				<input  type="text"  placeholder="descripcion" name='descripcion'>
+				<button type="submit"     >GUARDAR</button>
+			</form>
+			
+			<form action='/eventos' method = 'POST'>
+				<button type='submit'     >EVENTOS</button>
+			</form>
+			<br>
+			<br>
+			<table border = "1">
+				<tr>
+					<th scope="col" colspan=2>PARAMETROS CSS</th>
+				</tr>
+				<tr>
+					<td>
+						<form action='/{{USUARIO}}'  method = 'POST' role="form" id="formulario">
+						<u>COLOR DE FONDO:</u> 
+							   <input type="checkbox" name=background value="1">verde
+							   <input type="checkbox" name=background value="2">rojo
+							   <input type="checkbox" name=background value="3">blue
+					</td>
+					<td>
+						&nbsp; <button type="submit"     >GUARDAR</button></form>
+					</td>					   
+				</tr>								   
+				<tr>
+					<td>	
+						<form action='/{{USUARIO}}'  method = 'POST' role="form" id="formulario">
+							<u>FUENTE TAMAÑO:</u> 
+							<input type="checkbox" name=fuente value="1">pequeño
+							<input type="checkbox" name=fuente value="2">mediano
+							<input type="checkbox" name=fuente value="3">grande
+					</td>
+					<td>
+						 &nbsp; <button type="submit"     >GUARDAR</button></form>
+					</td>
+				</tr>		
+				<tr>
+					<td>					   
+					    <form action='/{{USUARIO}}'  method = 'POST' role="form" id="formulario">
+							 <u>COLOR LETRA:</u> 
+							 <input type="checkbox" name=letra value="1">verde
+							 <input type="checkbox" name=letra value="2">rojo
+							 <input type="checkbox" name=letra value="3">blue
+					</td>
+					<td>
+						&nbsp; <button type="submit"     >GUARDAR</button></form>
+					</td>
+				</tr>
+			</table>
+			
+		{% endif %}
+	</header>
+	<br>
+	<br>
+	<form action='/{{NOMBRE}}/RSS' method = 'GET'>
+		<button type='submit'>CANAL RSS</button>
+	</form>
+	<br>
+
+	<br>
+	<form action='/{{NOMBRE}}' method = 'POST'>
+		<input type="hidden" name=siguientes value="1">
+		<button type='submit'>SIGUIENTES EVENTOS</button>
+	</form>
+	<br>
+
+	<br>
+	<form action='/{{NOMBRE}}' method = 'POST'>
+		<input type="hidden" name=anteriores value="">
+		<button type='submit'>ANTERIORES EVENTOS</button>
+	</form>
+	<br>
+
+</body>
+	<table border = "1" align = "center">
+		<tr bgcolor = '407DB0'>
+			<th scope="col" colspan={{TOPE}}>EVENTOS DESTACADOS</th>
+		</tr>
+		<tr bgcolor= 'blue'>
+			<td>TITULO</td>
+			<td>GRATUITO</td>
+			<td>FECHA</td>
+			<td>FECHA-FIN</td>
+			<td>URL</td>
+			<td>TIPO</td>
+			<td>ID</td>
+			<td></td>
+			<td>ELEGIDA EN</td>
+
+		</tr>
+			{% for lista in FILA %}
+				<tr>{% for indi in lista %}
+				 {% if forloop.counter == 7 %}
+	       			 <td><a href="/actividad/{{indi}}">{{indi}}</a><td>
+	    		{% endif %}
+	    		{% if forloop.counter != 7 %}
+	       			<td>{{ indi }}</td>
+	    		{% endif %}
+			{% endfor %}
+			
+		</tr>
+		{% endfor %}
+	</table>
+
+</html>

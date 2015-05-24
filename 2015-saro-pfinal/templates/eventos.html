@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>MadridEvent</title>
+		<link rel="stylesheet" href="/css">
+	</head>
+	
+	<body>
+		{% if VALUE == 0%}
+	<form action='/login'  method = 'POST' role="form" id="login">
+			<input  type="text"     class="form-control" placeholder="User"     name='username'>
+			<input  type="password" class="form-control" placeholder="Password" name='password'>
+			<button type="submit"   class="btn btn-default">Login</button>
+		</form>
+	{% endif %}
+
+	{% if VALUE != 0%}
+	<form action='/logout' method = 'GET'>
+				<input  type="text"     class="form-control"  value="{{NOMBRE}}"    name='user'>
+				<button type='submit'     >LO GOUT</button>
+	</form>
+	{% endif %}
+
+			
+	<div id="menu">
+		<menu><a href='/'>INICIO</a></menu>
+		<menu><a href='/eventos'>TODAS</a></menu>
+		<menu><a href='/ayuda'>AYUDA</a></menu>
+		<img src="/image" alt="Madrid" height="42" width="42"> 
+
+	</div>
+		
+		<form action='/eventos'  method = 'POST' role="form" id="formulario">
+			<input  type="text"  placeholder="titulo" name='titulo'>
+			<button type="submit"     >FILTRAR</button>
+		</form>
+		<form action='/eventos'  method = 'POST' role="form" id="formulario">
+			<input  type="text"  placeholder="gratuito" name='gratuito'>
+			<button type="submit"     >FILTRAR</button>
+		</form>
+		<form action='/eventos'  method = 'POST' role="form" id="formulario">
+			<input  type="text"  placeholder="fecha" name='fecha'>
+			<button type="submit"     >FILTRAR</button>
+		</form>
+		<form action='/eventos'  method = 'POST' role="form" id="formulario">
+			<input  type="text"  placeholder="precio" name='precio'>
+			<button type="submit"     >FILTRAR</button>
+		</form>
+		<form action='/eventos'  method = 'POST' role="form" id="formulario">
+			<input  type="text"  placeholder="duracion" name='duracion'>
+			<button type="submit"     >FILTRAR</button>
+		</form>
+
+		</br>
+		</br>
+		</br>
+		<p><u>ULTIMA HORA DE ACTUALIZACION: </u> {{HORA}}</p>
+		
+		<form action='/eventos' method = 'POST'>
+			<input  type="hidden" name='actualizar'> </input> 
+			<button type='submit'     >ACTUALIZAR</button>
+		</form>
+		
+		<table border = "1" align = "center">
+			<tr bgcolor = '407DB0'>
+				<th scope="col" colspan={{TOPE}}>EVENTOS DESTACADS</th>
+			</tr>
+			<tr bgcolor= 'blue'>
+				<td>TITULO     </td>
+				<td>GRATUITO</td>
+				<td>FECHA</td>
+				<td>FECHA-FIN</td>
+				<td>DURACION</td>
+				<td>URL</td>
+				<td>TIPO</td>
+				<td>PRECIO</td>
+				<td>Nº       </td>
+				<td>SEGUIR   </td>
+			</tr>			
+
+			{% for lista in FILA %}
+			{% if forloop.last %}
+				HAY {{forloop.counter}} EVENTOS DESPONIBLES EN EL CANAL
+			{% endif %}
+			
+			<tr>
+			<td>{{lista.titulo}}</td>
+			<td>{{lista.gratuito}}</td>
+			<td>{{lista.fecha}}</td>
+			<td>{{lista.fechafin}}</td>
+			<td>{{lista.duracion}}</td>
+			<td>{{lista.url}}</td>
+			<td>{{lista.tipo}}</td>
+			<td>{{lista.precio}}</td>
+			<td>{{lista.id}}</td>
+
+			{% if VALUE = 1%}
+			<td bgcolor="green">
+							<form action='/eventos'  method = 'POST' role="form" id="formulario">
+								<input type="hidden" name='seguir' value={{ lista.id }}> </input>  
+								<button type="submit"     >SEGUIR</button>
+							</form>
+						</td>
+			</tr>
+			{% endif %}
+			{% endfor %}
+		</table>
+	</body>
+</html>
+
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	
+	<meta charset="utf-8">
+	<title>MadridEvent</title>
+	<style type="text/css" >
+		
+		body {
+			margin: 10px 20% 50px 70px;
+			font-family: sans-serif;
+			color: black;
+			background: white;
+		}
+		#menu{
+		 background:#f9f9f9;
+		 border:solid 1px #DEDEDE;
+		 border-radius:3px;
+		 width:350px;
+		 padding:5px;
+		 }
+		menu{
+		 color:#06F;
+		 display:inline-block;
+		 margin:0px;
+		 background:linear-gradient(#fff 0%,#dedede 100%);
+		 background:-moz-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-ms-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-o-linear-gradient(#fff 0%,#dedede 100%);
+		 background:-webkit-linear-gradient(#fff 0%,#dedede 100%);
+		 border:solid 1px #f9f9f9;
+		 border-radius:5px;
+		 width:100px;
+		 padding:5px;
+		 }
+		menu:hover{
+		 background:linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-moz-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-ms-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-o-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 background:-webkit-linear-gradient(#DEDEDE 0%, #FFF 100%);
+		 border-radius:3px;
+		 border:solid 1px #333;
+		 color:red;
+		 } 
+ </style>
+
+
+	{% if VALUE != 0%}
+	<link rel="stylesheet" href="/css">
+		{% endif %}
+	
+</head>
+<body>
+
+	{% if VALUE == 0%}
+	<header>
+		<form action='/login'  method = 'POST' role="form" id="login">
+			<input  type="text"     class="form-control" placeholder="User"     name='username'>
+			<input  type="password" class="form-control" placeholder="Password" name='password'>
+			<button type="submit"   class="btn btn-default">Login</button>
+		</form>
+	</header>
+	{% endif %}
+
+	{% if VALUE != 0%}
+	<form action='/logout' method = 'GET'>
+				<input  type="text"     class="form-control"  value="{{NOMBRE}}"    name='user'>
+				<button type='submit'     >LO GOUT</button>
+	</form>
+	{% endif %}
+
+	<div id="menu">
+
+		<menu><a href='/'>INICIO</a></menu>
+		<menu><a href='/eventos'>EVENTOS</a></menu>
+		<menu><a href='/ayuda'>AYUDA</a></menu>
+
+
+
+		 <img src="/image" alt="Madrid" height="42" width="42"> 
+	</div>
+	
+	<table border = "1" align = "center">
+		<tr bgcolor = '00FF99'>
+			<th scope="col" colspan='4'>PAGINAS PERSONALES</th>
+		</tr>
+		<tr bgcolor= '00FFCC'>
+			{% for usuarios in LISTA1 %}
+			<td><a href='/{{usuarios }}'>{{ usuarios }}</td>
+			{% endfor %}
+		</tr>
+		<tr bgcolor= '00FFCC'>
+			{% for titulos in LISTA2 %}
+			<td>{{titulos}}</td>
+			{% endfor %}
+		</tr>
+		<tr bgcolor= '00FFCC'>
+			{% for descripciones in LISTA3 %}
+			<td>{{ descripciones }}</td>
+			{% endfor %}
+		</tr>		
+	</table>
+	
+	</br>
+	</br>
+	</br>
+	
+	<table border = "1" align = "center">
+		<tr bgcolor = '407DB0'>
+			<th scope="col" colspan={{TOPE}}>EVENTOS DESTACADOS</th>
+		</tr>
+		<tr bgcolor= 'blue'>
+			<td>TITULO     </td>
+			<td>GRATUITO</td>
+			<td>FECHA</td>
+			<td>FECHA-FIN</td>
+			<td>DURACION</td>
+			<td>URL</td>
+			<td>TIPO</td>
+			<td>PRECIO</td>
+		</tr>
+		{% for lista in FILA %}
+			<tr>
+			<td>{{lista.titulo}}</td>
+			<td>{{lista.gratuito}}</td>
+			<td>{{lista.fecha}}</td>
+			<td>{{lista.fechafin}}</td>
+			<td>{{lista.duracion}}</td>
+			<td><a href="{{lista.url}}">{{lista.url}}</a></td>
+			<td>{{lista.tipo}}</td>
+			<td>{{lista.precio}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<div>
+	<br><b>AMPLIE LA INFORMACION :</b></br>
+	<div>{% autoescape off %}{{ INFO }}{% endautoescape %}</div>
+	
+	</div>
+</body>	
+
+</html>

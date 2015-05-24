@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<rss version="2.0">
+<channel>
+
+	  <title>MadridEvent</title>
+  	<link>http://www.madridevent.com/</link>
+  <description>Utimos eventos de Madri</description>
+{% for lista in LISTA %}
+	{% for indi in lista %}
+		{% if forloop.counter = 1 %}
+		<item>
+   		<title>{{indi}}</title>
+   		{% elif forloop.counter = 5 %}
+   		<link>{{indi}}</link>
+   		{% elif forloop.counter = 6 %}
+   		<description>TIPO : {{indi}}</description>
+  		</item>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+</raiz>
+
+
+</channel>
+</rss>
